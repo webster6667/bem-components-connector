@@ -17,7 +17,7 @@ npm i bem-components-connector
 import {blockClassesConcat, elementClassesConcat, bemClassName} from 'bem-components-connector'
 ```
 
-* bemClassName
+* **bemClassName**
 default bem function
 ```javascript
 import {bemClassName} from 'bem-components-connector'
@@ -27,8 +27,8 @@ const block = bemClassName('block'), //return function
       elementWithMod = block('element', {small: true}) //return 'block__element block__element_small'
 ```
 
-* blockClassesConcat
-helper function for concat external classes and internal bem
+* **blockClassesConcat**
+helper function for concat external classes and internal bem classes for block,
 and convert camelCase modifier to dash
 
 ```typescript jsx
@@ -53,6 +53,10 @@ export default function () {
     
 }
 ```
+
+* **elementClassesConcat**
+helper function for concat external classes and internal bem classes for element,
+and convert camelCase modifier to dash
 
 ```typescript jsx
 import {elementClassesConcat, bemClassName} from 'bem-components-connector'
