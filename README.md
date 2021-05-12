@@ -24,7 +24,9 @@ import {bemClassName} from 'bem-components-connector'
 
 const block = bemClassName('block'), //return function
       element = block('element', {small: false}), //return 'block__element'
-      elementWithMod = block('element', {small: true}) //return 'block__element block__element_small'
+      elementWithBooleanMod = block('element', {small: true}), //return 'block__element block__element_small',
+      elementWithTextMod = block('element', {size: 'xl'}) //return 'block__element block__element_size-xl'
+
 ```
 
 * **blockClassesConcat**
@@ -36,9 +38,10 @@ import {blockClassesConcat} from 'bem-components-connector'
 
 const MyComponent = ({
                         className = '',
-                        xAlign = false                            
+                        xAlign = false,
+                        size = false                            
                    }) => {
-    let blockClasses = blockClassesConcat('component', {xAlign}, className)
+    let blockClasses = blockClassesConcat('component', {xAlign, size}, className)
 
     return (<div className={blockClasses} />)
 }
@@ -47,7 +50,7 @@ export default function () {
     
     return (<>
         <MyComponent xAlign={true}/> {/*return <div className='component component_x-align' /> */}
-        <MyComponent xAlign={true} className={'additional-class'}/> {/*return <div className='component component_x-align' additional-class' /> */}
+        <MyComponent size={'xl'} className={'additional-class'}/> {/*return <div className='component component_size-xl additional-class' /> */}
         <MyComponent /> {/*return <div className='component' /> */}
     </>)
     
@@ -67,9 +70,10 @@ const block = bemClassName('block')
 
 const MyComponent = ({
                         className = '',
-                        xAlign = false                            
+                        xAlign = false,
+                        size = false                                                        
                    }) => {
-    let elementClasses = elementClassesConcat(block(),'element', {xAlign}, className)
+    let elementClasses = elementClassesConcat(block(),'element', {xAlign, size}, className)
 
     return (<div className={elementClasses} />)
 }
@@ -78,12 +82,38 @@ export default function () {
     
     return (<>
         <MyComponent xAlign={true}/> {/*return <div className='block__element block__element_x-align' /> */}
-        <MyComponent xAlign={true} className={'additional-class'}/> {/*return <div className='block__element block__element_x-align' additional-class' /> */}
+        <MyComponent size={'xl'} className={'additional-class'}/> {/*return <div className='block__element block__element_size-xl additional-class' /> */}
         <MyComponent /> {/*return <div className='block__element' /> */}
     </>)
     
 }
 ```
+
+## If component will be packed
+Create object with dynamic keys
+```typescript jsx
+import {blockClassesConcat} from 'bem-components-connector'
+
+const MyComponent = ({
+                        className = '',
+                        modifiers = {}                           
+                   }) => {
+    let blockClasses = blockClassesConcat('component', modifiers, className)
+
+    return (<div className={blockClasses} />)
+}
+
+export default function () {
+    
+    return (<>
+        <MyComponent modifiers={{anyBooleanMod: true}} /> {/*return <div className='component component_any-boolean-mod' /> */}
+        <MyComponent modifiers={{anyTextMod: 'success'}} className={'additional-class'}/> {/*return <div className='component component_any-text-mod-success additional-class' /> */}
+        <MyComponent /> {/*return <div className='component' /> */}
+    </>)
+    
+}
+```
+
 
 ## Author
 webster6667
