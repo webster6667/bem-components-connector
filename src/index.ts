@@ -4,12 +4,12 @@ import {camelToDash} from 'camel-to-dash'
 export const bemClassName = withNaming({e: '__', m: '_', v: '-'})
 
 const camelCaseModifiersToDash = (camelCaseModifiers: NoStrictEntityMods) => {
-    let dashModifiers: {[key: string]: string} = {}
+    let dashModifiers: {[key: string]: string | boolean} = {}
 
     Object.keys(camelCaseModifiers).forEach((camelCaseKey) => {
         let dashKey = camelToDash(camelCaseKey)
 
-        dashModifiers[dashKey] = String(camelCaseModifiers[camelCaseKey])
+        dashModifiers[dashKey] = camelCaseModifiers[camelCaseKey] as string | boolean
     })
 
     return dashModifiers
