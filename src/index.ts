@@ -1,7 +1,7 @@
 import {withNaming, NoStrictEntityMods} from '@bem-react/classname'
 import {camelToDash} from 'camel-to-dash'
 
-export const bemClassName = withNaming({e: '__', m: '_', v: '-'})
+const bemClassName = withNaming({e: '__', m: '_', v: '-'})
 
 const camelCaseModifiersToDash = (camelCaseModifiers: NoStrictEntityMods) => {
     let dashModifiers: {[key: string]: string | boolean} = {}
@@ -15,7 +15,7 @@ const camelCaseModifiersToDash = (camelCaseModifiers: NoStrictEntityMods) => {
     return dashModifiers
 }
 
-export const blockClassesConcat = (blockName:string, modifiers: NoStrictEntityMods, additionalClasses: string = ''):string => {
+const blockClassesConcat = (blockName:string, modifiers: NoStrictEntityMods, additionalClasses: string = ''):string => {
 
     let block = bemClassName(blockName),
         blockBemClasses = block(camelCaseModifiersToDash(modifiers)),
@@ -24,11 +24,17 @@ export const blockClassesConcat = (blockName:string, modifiers: NoStrictEntityMo
     return blockClasses
 }
 
-export const elementClassesConcat = (blockName:string, element: string, modifiers: NoStrictEntityMods, additionalClasses: string = ''):string => {
+const elementClassesConcat = (blockName:string, element: string, modifiers: NoStrictEntityMods, additionalClasses: string = ''):string => {
 
     let block = bemClassName(blockName),
         blockBemClasses = block(element, camelCaseModifiersToDash(modifiers)),
         blockClasses = `${blockBemClasses} ${additionalClasses}`.trim()
 
     return blockClasses
+}
+
+export {
+    bemClassName,
+    blockClassesConcat,
+    elementClassesConcat
 }

@@ -7,7 +7,6 @@
 > helper functions for concat component bem classes with external classes and modifiers
 
 [![npm version](https://badge.fury.io/js/bem-components-connector.svg)](https://www.npmjs.com/package/bem-components-connector)
-[![](https://data.jsdelivr.com/v1/package/npm/bem-components-connector/badge)](https://www.jsdelivr.com/package/npm/bem-components-connector)
 
 ## Install
 
